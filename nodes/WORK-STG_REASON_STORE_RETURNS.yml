@@ -416,11 +416,36 @@ steps:
                   - columnCounter: 5c86ff09-a97f-48f2-a68d-edce6c4a1ee6
                     stepCounter: 34158874-7e25-40d2-984f-17f115f2c081
                 transform: ""
+          - columnReference:
+              columnCounter: 80d46eb3-caea-4d09-92f8-a6aa47b8cac6
+              stepCounter: 708fe13b-6ae8-4de3-a6c6-baa49e21f08b
+            dataType: VARCHAR(50)
+            description: ""
+            name: I_PRODUCT_NAME
+            nullable: true
+            sourceColumnReferences:
+              - columnReferences:
+                  - columnCounter: fecd4c63-3baf-454a-af7f-9f06631b502e
+                    stepCounter: c0099a01-2369-42bb-a5c6-a9e2a0cb10cb
+                transform: ""
+          - columnReference:
+              columnCounter: 481f913c-08e0-48a1-a281-162b4d56b75f
+              stepCounter: 708fe13b-6ae8-4de3-a6c6-baa49e21f08b
+            dataType: VARCHAR(200)
+            description: ""
+            name: I_ITEM_DESC
+            nullable: true
+            sourceColumnReferences:
+              - columnReferences:
+                  - columnCounter: db399088-99b4-4248-973a-4a05affb2b0a
+                    stepCounter: c0099a01-2369-42bb-a5c6-a9e2a0cb10cb
+                transform: ""
         cteString: ""
         enabledColumnTestIDs: []
         sourceMapping:
           - aliases:
               DIM_CUSTOMER: 9ace2779-b34c-4de4-af37-3c18327e54c5
+              DIM_ITEM: c0099a01-2369-42bb-a5c6-a9e2a0cb10cb
               DIM_REASON: 3067bde6-4d64-4e80-8857-6f32d9ae08a1
               FCT_STORE_RETURNS: 34158874-7e25-40d2-984f-17f115f2c081
             customSQL:
@@ -428,6 +453,8 @@ steps:
             dependencies:
               - locationName: WORK
                 nodeName: DIM_CUSTOMER
+              - locationName: WORK
+                nodeName: DIM_ITEM
               - locationName: WORK
                 nodeName: DIM_REASON
               - locationName: WORK
@@ -439,6 +466,8 @@ steps:
                 ON "DIM_REASON"."R_REASON_SK" = "FCT_STORE_RETURNS"."SR_REASON_SK"
                 INNER JOIN {{ ref('WORK', 'DIM_CUSTOMER') }} "DIM_CUSTOMER"
                 ON "DIM_CUSTOMER"."C_CUSTOMER_SK" = "FCT_STORE_RETURNS"."SR_CUSTOMER_SK"
+                LEFT JOIN {{ ref('WORK', 'DIM_ITEM') }} "DIM_ITEM"
+                ON "FCT_STORE_RETURNS"."SR_ITEM_SK" = "DIM_ITEM"."I_ITEM_SK"
             name: STG_REASON_STORE_RETURNS
             noLinkRefs: []
       name: STG_REASON_STORE_RETURNS
