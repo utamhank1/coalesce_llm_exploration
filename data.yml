@@ -1,7 +1,29 @@
 defaultStorageMapping: WORK
 installedPackages: {}
 jobs: {}
-locations: {}
+locations:
+  SRC:
+    mappingDefinitions:
+      "30":
+        database: SNOWFLAKE_SAMPLE_DATA
+        schema: TPCDS_SF10TCL
+      "31":
+        database: SNOWFLAKE_SAMPLE_DATA
+        schema: TPCDS_SF10TCL
+      "32":
+        database: SNOWFLAKE_SAMPLE_DATA
+        schema: TPCDS_SF10TCL
+  WORK:
+    mappingDefinitions:
+      "30":
+        database: JJ_TEST
+        schema: LLM_DEPLOY_TEST
+      "31":
+        database: JJ_QA
+        schema: LLM_QA
+      "32":
+        database: JJ_PROD
+        schema: LLM_PROD
 macros: {}
 packages: {}
 projects: {}
