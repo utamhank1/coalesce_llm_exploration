@@ -1,0 +1,79 @@
+steps:
+  STG_REASON-8d98cfcd-ca5a-4d99-806f-b5c951413c5a:
+    operation:
+      config:
+        insertStrategy: INSERT
+        postSQL: ""
+        preSQL: ""
+        testsEnabled: true
+        truncateBefore: true
+      database: ""
+      deployEnabled: true
+      description: ""
+      isMultisource: false
+      locationName: WORK
+      materializationType: table
+      metadata:
+        appliedNodeTests: []
+        columns:
+          - columnReference:
+              columnCounter: 8cb49207-61e2-4ffd-9132-a4be22eb7e19
+              stepCounter: 8d98cfcd-ca5a-4d99-806f-b5c951413c5a
+            dataType: NUMBER(38,0)
+            description: ""
+            hashColumns: []
+            hashDetails: null
+            name: R_REASON_SK
+            nullable: false
+            sourceColumnReferences:
+              - columnReferences:
+                  - columnCounter: 61a1220e-b975-420d-bd1e-2d3b2bfc9682
+                    stepCounter: 48c9713b-f417-41a0-abb8-e71d39cb45be
+                transform: ""
+          - columnReference:
+              columnCounter: 9f0a0408-e9e2-4585-ad73-b9229003fc86
+              stepCounter: 8d98cfcd-ca5a-4d99-806f-b5c951413c5a
+            dataType: VARCHAR(16)
+            description: ""
+            hashColumns: []
+            hashDetails: null
+            name: R_REASON_ID
+            nullable: false
+            sourceColumnReferences:
+              - columnReferences:
+                  - columnCounter: d384c2fc-5aaa-4b99-ad6c-98278f840bb7
+                    stepCounter: 48c9713b-f417-41a0-abb8-e71d39cb45be
+                transform: ""
+          - columnReference:
+              columnCounter: c90f2de3-6f06-488f-94db-80db9db3c651
+              stepCounter: 8d98cfcd-ca5a-4d99-806f-b5c951413c5a
+            dataType: VARCHAR(100)
+            description: ""
+            hashColumns: []
+            hashDetails: null
+            name: R_REASON_DESC
+            nullable: true
+            sourceColumnReferences:
+              - columnReferences:
+                  - columnCounter: c75339cf-deb1-4250-a879-9ed8663f6f0c
+                    stepCounter: 48c9713b-f417-41a0-abb8-e71d39cb45be
+                transform: ""
+        cteString: ""
+        enabledColumnTestIDs: []
+        sourceMapping:
+          - aliases: {}
+            customSQL:
+              customSQL: ""
+            dependencies:
+              - locationName: SRC
+                nodeName: REASON
+            join:
+              joinCondition: FROM {{ ref('SRC', 'REASON') }} "REASON"
+            name: STG_REASON
+            noLinkRefs: []
+      name: STG_REASON
+      overrideSQL: false
+      schema: ""
+      sqlType: Stage
+      type: sql
+    stepCounter: 8d98cfcd-ca5a-4d99-806f-b5c951413c5a
