@@ -222,7 +222,7 @@ stepTypes:
           - displayName: Snowflake Cortex Function Call with parameters
             attributeName: sf_cortex
             type: textBox
-            isRequired: true
+            isRequired: false
 
           - displayName: Storage Location Name
             attributeName: storageLoc
@@ -243,24 +243,64 @@ stepTypes:
           placement: beginning
       templates:
         create:
-          templateString: |
+          templateString: |-
             {% if node.override.create.enabled %}
             	
             	{{ node.override.create.script }}
             {% elif node.materializationType == 'table' %}
-            	{{ stage('Create Stage Table') }}
+            	{{ stage('Create Output Table') }}
             	
-            	CREATE OR REPLACE TABLE {{ ref_no_link(node.location.name, node.name) }}
+            	CREATE OR REPLACE TABLE {{ ref_no_link(node.location.name, node.name) }} (
             	
-            	{% for col in columns %}
-            			"{{ col.name }}" {{ col.dataType }}    
+            	    {% for col in columns %}
+            			"{{ col.name }}" {{ col.dataType }}
+            			{%- if not col.nullable %} NOT NULL
+            				{%- if col.defaultValue | length > 0 %} DEFAULT {{ col.defaultValue }}{% endif %}
+            			{% endif %}
+            			{%- if col.description | length > 0 %} COMMENT '{{ col.description | escape }}'{% endif %}
+            			{%- if not loop.last -%}, {% endif %}
+            	    {% endfor %},
+            			"Translation_" varchar(50)
+                )
+            {% elif node.materializationType == 'view' %}
+                {{ stage('Create Stage View') }}
+
+                CREATE OR REPLACE VIEW {{ ref_no_link(node.location.name, node.name) }}
+                (
+                    {% for col in columns %}
+                        "{{ col.name }}"
+                        {%- if col.description | length > 0 %} COMMENT '{{ col.description | escape }}'{% endif %}
+                        {%- if not loop.last -%}, {% endif %}
+                    {% endfor %}
+                )
+                {%- if node.description | length > 0 %} COMMENT = '{{ node.description | escape }}'{% endif %}
+                AS
+                {% for source in sources %}
+                    SELECT
+                    {% for col in source.columns %}
+                        {{ get_source_transform(col) }} AS "{{ col.name }}"
+                        {%- if not loop.last -%}, {% endif %}
+                    {% endfor %}
+
+                    {{ source.join }}
+
+                    {% if not loop.last %}
+                        {% if config.insertStrategy in ['UNION', 'UNION ALL'] %}
+                            {{ config.insertStrategy }}
+                        {% else %}
+                            UNION
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+
+            {% endif %}
         run:
           templateString: |-
             {{ stage('Execute Cortex Query') }}
             BEGIN
                 USE DATABASE {{ storageLocations | selectattr('name', 'equalto', 'WORK') | map(attribute='database') | first
              }};
-                select {{ config.sf_cortex }} from {{ ref_link('WORK') }};
+                select {{ config.feature_set}}, (select snowflake.ml.translate(src_name.{{ config.feature_set}}, 'en_XX', 'de_DE')) as Translation_ from source.name src_name;
             END;
     name: Snowflake_LLM_Input
     version: 1
@@ -381,9 +421,8 @@ stepTypes:
 
             {% endif %}
         run:
-          templateString: |2
-
-                {% for test in node.tests if config.testsEnabled %}
+          templateString: |
+            {% for test in node.tests if config.testsEnabled %}
                     {% if test.runOrder == 'Before' %}
                         {{ test_stage(test.name, test.continueOnFailure) }}
                         {{ test.templateString }}
