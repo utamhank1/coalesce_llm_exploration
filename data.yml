@@ -204,6 +204,50 @@ stepTypes:
             )
     name: DRAFT LLM PROMPT NODE
     version: 1
+  StepType-26:
+    id: "26"
+    isDisabled: false
+    metadata:
+      defaultStorageLocation: null
+      error: null
+      nodeMetadataSpec: |-
+        capitalized: Snowlake_LLM
+        short: SFLLM
+        plural: Snowflake Large Language Model
+        tagColor: 'white'
+        config:
+        - groupName: Options
+          items:
+
+          - displayName: Snowflake Cortex Function Call with parameters
+            attributeName: sf_cortex
+            type: textBox
+            isRequired: true
+
+          - displayName: Storage Location Name
+            attributeName: storageLoc
+            type: textBox
+            isRequired: true
+
+        systemColumns:
+        - displayName: 'VALUE'
+          attributeName: 'VALUE'
+          transform: ''
+          dataType: VARIANT
+          placement: beginning
+      templates:
+        create:
+          templateString: ""
+        run:
+          templateString: |-
+            {{ stage('Execute Cortex Query') }}
+            BEGIN
+                USE DATABASE {{ storageLocations | selectattr('name', 'equalto', 'WORK') | map(attribute='database') | first
+             }};
+                {{ config.sf_cortex }};
+            END;
+    name: Snowflake_LLM_Input
+    version: 1
   StepType-Dimension:
     id: Dimension
     isDisabled: false
