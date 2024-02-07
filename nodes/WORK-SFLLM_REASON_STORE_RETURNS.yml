@@ -2,6 +2,7 @@ steps:
   SFLLM_REASON_STORE_RETURNS-ec7d275d-31f8-488f-98a2-97be7617d84a:
     operation:
       config:
+        feature_set: null
         sf_cortex: sno
         storageLoc: WORK
       database: ""

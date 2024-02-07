@@ -250,7 +250,7 @@ stepTypes:
             {% elif node.materializationType == 'table' %}
             	{{ stage('Create Output Table') }}
             	
-            	CREATE OR REPLACE TABLE {{ ref_no_link(node.location.name, node.name) }} (
+            	CREATE OR REPLACE TABLE {{ ref_no_link(node.location.name, 'LLM_'+ node.name) }} (
             	
             	    {% for col in columns %}
             			"{{ col.name }}" {{ col.dataType }}
@@ -297,11 +297,9 @@ stepTypes:
         run:
           templateString: |-
             {{ stage('Execute Cortex Query') }}
-            BEGIN
-                USE DATABASE {{ storageLocations | selectattr('name', 'equalto', 'WORK') | map(attribute='database') | first
-             }};
-                select {{ config.feature_set}}, (select snowflake.ml.translate(src_name.{{ config.feature_set}}, 'en_XX', 'de_DE')) as Translation_ from source.name src_name;
-            END;
+
+                INSERT INTO {{ 'LLM_'+node.name }} (
+                select {{ config.feature_set}}, (select snowflake.ml.translate(src_name.{{ config.feature_set }}, 'en_XX', 'de_DE')) as Translation_ from {{ ref_no_link(node.location.name, node.name) }} src_name);
     name: Snowflake_LLM_Input
     version: 1
   StepType-27:
