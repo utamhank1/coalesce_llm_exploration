@@ -1,0 +1,178 @@
+fileVersion: 1
+id: d335869a-56bd-4355-ac58-8f0bdf1332d1
+name: DT_WRK_CATALOG_PAGE
+operation:
+  config:
+    clusterKey: false
+    clusterKeyConfig:
+      items:
+        - {}
+    clusterKeyConfigExpressions:
+      items:
+        - {}
+    clusterKeyExpressions: false
+    downstreamOption: false
+    groupByAll: false
+    initialize: ON_CREATE
+    insertStrategy: UNION ALL
+    lagSpecification:
+      items:
+        - lagValue: 60
+    refresh_mode: AUTO
+    selectDistinct: false
+    warehouseName: dev_wh_xs
+  database: ""
+  deployEnabled: true
+  description: ""
+  isMultisource: false
+  locationName: WORK
+  materializationType: dynamic table
+  metadata:
+    appliedNodeTests: []
+    columns:
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 35cade78-5121-4d51-a9e8-5015d9e81cbf
+          stepCounter: d335869a-56bd-4355-ac58-8f0bdf1332d1
+        config: {}
+        dataType: NUMBER(38,0)
+        description: ""
+        name: CP_CATALOG_PAGE_SK
+        nullable: false
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 97b7bafe-0f02-4c64-859d-09bd0cce8f1c
+                stepCounter: 5d39b541-c2b2-42f4-867a-e79d6ddfb375
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 18061af1-bf2e-4393-94ea-027de0d66f3a
+          stepCounter: d335869a-56bd-4355-ac58-8f0bdf1332d1
+        config: {}
+        dataType: VARCHAR(16)
+        description: ""
+        name: CP_CATALOG_PAGE_ID
+        nullable: false
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 187fe024-55c3-42fd-83b6-53c7e27353b4
+                stepCounter: 5d39b541-c2b2-42f4-867a-e79d6ddfb375
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: d75151f0-b9be-4669-b18d-9069a43b6eda
+          stepCounter: d335869a-56bd-4355-ac58-8f0bdf1332d1
+        config: {}
+        dataType: NUMBER(38,0)
+        description: ""
+        name: CP_START_DATE_SK
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 4503c3bf-8c8d-4c6d-9bca-88a2631d7d6a
+                stepCounter: 5d39b541-c2b2-42f4-867a-e79d6ddfb375
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: e1400bdb-10f1-4690-92a3-a8d0e74961c5
+          stepCounter: d335869a-56bd-4355-ac58-8f0bdf1332d1
+        config: {}
+        dataType: NUMBER(38,0)
+        description: ""
+        name: CP_END_DATE_SK
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 9ccdf134-1036-452d-997c-52f7c85d78c4
+                stepCounter: 5d39b541-c2b2-42f4-867a-e79d6ddfb375
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: fc51d8e6-8a7a-42f2-9c51-1980e18836ba
+          stepCounter: d335869a-56bd-4355-ac58-8f0bdf1332d1
+        config: {}
+        dataType: VARCHAR(50)
+        description: ""
+        name: CP_DEPARTMENT
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 63e98ce1-bdf4-47fc-9e0c-1c16c224f28a
+                stepCounter: 5d39b541-c2b2-42f4-867a-e79d6ddfb375
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 6728d2b0-6197-4900-b185-7f6c055e00ce
+          stepCounter: d335869a-56bd-4355-ac58-8f0bdf1332d1
+        config: {}
+        dataType: NUMBER(38,0)
+        description: ""
+        name: CP_CATALOG_NUMBER
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: 24da58c5-3d70-4471-9f5d-e24b86d7a875
+                stepCounter: 5d39b541-c2b2-42f4-867a-e79d6ddfb375
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: b183bc3f-47cc-4b03-90a9-423cd9802079
+          stepCounter: d335869a-56bd-4355-ac58-8f0bdf1332d1
+        config: {}
+        dataType: NUMBER(38,0)
+        description: ""
+        name: CP_CATALOG_PAGE_NUMBER
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: c0c0bf49-b928-4c9d-89b2-af4a3b6b2667
+                stepCounter: 5d39b541-c2b2-42f4-867a-e79d6ddfb375
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 5c58b850-7221-4088-b8b6-7b7fda54fa76
+          stepCounter: d335869a-56bd-4355-ac58-8f0bdf1332d1
+        config: {}
+        dataType: VARCHAR(100)
+        description: ""
+        name: CP_DESCRIPTION
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: d95f7bae-3408-4f79-9a78-d5743b28f15c
+                stepCounter: 5d39b541-c2b2-42f4-867a-e79d6ddfb375
+            transform: ""
+      - appliedColumnTests: {}
+        columnReference:
+          columnCounter: 358b425e-ada6-48c5-86ab-04f0d7c3f907
+          stepCounter: d335869a-56bd-4355-ac58-8f0bdf1332d1
+        config: {}
+        dataType: VARCHAR(100)
+        description: ""
+        name: CP_TYPE
+        nullable: true
+        sourceColumnReferences:
+          - columnReferences:
+              - columnCounter: efa247a4-cc20-4400-ac41-eddde9a733ea
+                stepCounter: 5d39b541-c2b2-42f4-867a-e79d6ddfb375
+            transform: ""
+    cteString: ""
+    enabledColumnTestIDs: []
+    sourceMapping:
+      - aliases: {}
+        customSQL:
+          customSQL: ""
+        dependencies:
+          - locationName: WORK
+            nodeName: STG_CATALOG_PAGE
+        join:
+          joinCondition: FROM {{ ref('WORK', 'STG_CATALOG_PAGE') }} "STG_CATALOG_PAGE"
+        name: DT_WRK_CATALOG_PAGE
+        noLinkRefs: []
+  name: DT_WRK_CATALOG_PAGE
+  overrideSQL: false
+  schema: ""
+  sqlType: DTTABLES:::156
+  type: sql
+  version: 1
+type: Node

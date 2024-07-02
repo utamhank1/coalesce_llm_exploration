@@ -1,11 +1,14 @@
 fileVersion: 1
 id: "31"
 mappingDefinitions:
+  SCHEMA2:
+    database: ""
+    schema: ""
   SRC:
     database: SNOWFLAKE_SAMPLE_DATA
     schema: TPCDS_SF10TCL
   WORK:
     database: JJ_QA
-    schema: LLM_QA
+    schema: HOL_LAB_12_14_QA
 name: QA
 type: Environment
